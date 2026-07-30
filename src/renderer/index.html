@@ -57,7 +57,7 @@
                 <rect x="3" y="14" width="7" height="7" rx="2"/>
                 <rect x="14" y="14" width="7" height="7" rx="2"/>
               </svg>
-              Media Pads
+              Pad & Aksi
               <span class="nav-count" id="sidebarPadCount">0</span>
             </button>
             <button class="nav-item" id="openPlayerGuide" type="button">
@@ -66,6 +66,13 @@
                 <path d="M3 5v14"/>
               </svg>
               Cara penggunaan
+            </button>
+            <button class="nav-item" id="openSettingsButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 9 19.37a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.63 15 1.7 1.7 0 0 0 3.08 14H3v-4h.08A1.7 1.7 0 0 0 4.63 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.63a1.7 1.7 0 0 0 1-1.55V3h4v.08A1.7 1.7 0 0 0 15 4.63a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.37 9c.16.6.7 1 1.55 1H21v4h-.08c-.84 0-1.39.4-1.55 1Z"/>
+              </svg>
+              Pengaturan & Tentang
             </button>
           </nav>
 
@@ -111,8 +118,8 @@
                 <span class="eyebrow-line"></span>
                 CONTROL CENTER
               </div>
-              <h1>Media Pads</h1>
-              <p>Tekan pad atau hotkey untuk memutar audio dan video secara instan.</p>
+              <h1>Pad & Aksi</h1>
+              <p>Putar media atau jalankan aksi Windows dari satu deck dan hotkey global.</p>
             </div>
             <div class="heading-actions">
               <label class="search-box">
@@ -127,6 +134,38 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
                 Tambah media
               </button>
+              <button class="secondary-button action-add-button" id="addActionButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-7 11h6l-1 9 7-12h-6Z"/></svg>
+                Tambah aksi
+              </button>
+            </div>
+          </section>
+
+          <section class="deck-switcher" aria-labelledby="deckSwitcherTitle">
+            <div class="deck-switcher-heading">
+              <span class="deck-switcher-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="4" width="18" height="16" rx="3"/>
+                  <path d="M8 9h3v3H8zM14 9h3v3h-3zM8 15h9"/>
+                </svg>
+              </span>
+              <div>
+                <strong id="deckSwitcherTitle">Deck kamu</strong>
+                <span>Pisahkan pad sesuai aktivitas</span>
+              </div>
+            </div>
+            <div class="deck-tabs" id="deckTabs" role="tablist" aria-label="Daftar deck"></div>
+            <div class="deck-switcher-actions">
+              <button class="compact-button" id="addDeckButton" type="button" aria-label="Tambah deck" title="Tambah deck">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                <span>Deck baru</span>
+              </button>
+              <button class="icon-button compact-icon-button" id="renameDeckButton" type="button" aria-label="Ubah nama deck" title="Ubah nama deck">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5 5 5M4 20l3.5-.8L18 8.7a2 2 0 0 0-2.7-2.7L4.8 16.5Z"/></svg>
+              </button>
+              <button class="icon-button compact-icon-button deck-delete-button" id="deleteDeckButton" type="button" aria-label="Hapus deck" title="Hapus deck">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg>
+              </button>
             </div>
           </section>
 
@@ -134,13 +173,10 @@
             <article class="stat-card">
               <span class="stat-icon stat-icon-purple">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="3" width="7" height="7" rx="2"/>
-                  <rect x="14" y="3" width="7" height="7" rx="2"/>
-                  <rect x="3" y="14" width="7" height="7" rx="2"/>
-                  <rect x="14" y="14" width="7" height="7" rx="2"/>
+                  <path d="m13 2-7 11h6l-1 9 7-12h-6Z"/>
                 </svg>
               </span>
-              <div><strong id="totalPads">0</strong><span>Total pad</span></div>
+              <div><strong id="totalActions">0</strong><span>Aksi</span></div>
             </article>
             <article class="stat-card">
               <span class="stat-icon stat-icon-teal">
@@ -176,7 +212,7 @@
           <section class="deck-section">
             <div class="section-toolbar">
               <div>
-                <h2>Deck utama</h2>
+                <h2 id="activeDeckTitle">Deck utama</h2>
                 <span id="visiblePadSummary">0 pad</span>
               </div>
               <div class="toolbar-actions">
@@ -200,11 +236,17 @@
                 <div class="empty-key"><span>+</span></div>
               </div>
               <h2>Pad kamu masih kosong</h2>
-              <p>Tambahkan audio atau video, lalu pasangkan tombol keyboard untuk memutarnya dengan cepat.</p>
-              <button class="primary-button" id="emptyAddButton" type="button">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-                Tambah media pertama
-              </button>
+              <p>Tambahkan audio, video, atau aksi Windows lalu pasangkan hotkey untuk menjalankannya dengan cepat.</p>
+              <div class="empty-state-actions">
+                <button class="primary-button" id="emptyAddButton" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  Tambah media
+                </button>
+                <button class="secondary-button" id="emptyAddActionButton" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-7 11h6l-1 9 7-12h-6Z"/></svg>
+                  Tambah aksi
+                </button>
+              </div>
               <span>Atau tarik file ke area ini</span>
             </div>
 
@@ -338,6 +380,28 @@
             </label>
           </div>
 
+          <div class="form-section playback-section">
+            <span class="field-label">Cara pad merespons saat ditekan</span>
+            <div class="playback-mode-grid" id="playbackModeOptions" role="radiogroup" aria-label="Mode pemutaran">
+              <button class="playback-mode is-active" data-playback-mode="exclusive" type="button" role="radio" aria-checked="true">
+                <span class="playback-mode-icon" aria-hidden="true">01</span>
+                <span><strong>Eksklusif</strong><small>Hentikan media lain, lalu putar pad ini.</small></span>
+              </button>
+              <button class="playback-mode" data-playback-mode="restart" type="button" role="radio" aria-checked="false">
+                <span class="playback-mode-icon" aria-hidden="true">↺</span>
+                <span><strong>Mulai ulang</strong><small>Tekan lagi untuk memulai pad dari awal.</small></span>
+              </button>
+              <button class="playback-mode" data-playback-mode="toggle" type="button" role="radio" aria-checked="false">
+                <span class="playback-mode-icon" aria-hidden="true">▶</span>
+                <span><strong>Putar / berhenti</strong><small>Tekan lagi untuk menghentikan pad ini.</small></span>
+              </button>
+              <button class="playback-mode" data-playback-mode="overlap" type="button" role="radio" aria-checked="false">
+                <span class="playback-mode-icon" aria-hidden="true">＋</span>
+                <span><strong>Tumpuk suara</strong><small>Setiap tekanan membuat pemutaran baru.</small></span>
+              </button>
+            </div>
+          </div>
+
           <label class="loop-option">
             <span>
               <strong>Putar berulang</strong>
@@ -361,6 +425,233 @@
       </section>
     </div>
 
+    <div class="modal-backdrop" id="actionEditorModal" hidden>
+      <section class="modal action-editor-modal" role="dialog" aria-modal="true" aria-labelledby="actionEditorTitle">
+        <div class="modal-header">
+          <div>
+            <span class="modal-kicker">PAD AKSI</span>
+            <h2 id="actionEditorTitle">Tambah aksi</h2>
+            <p>Bangun aksi Windows atau automasi tanpa menulis JSON.</p>
+          </div>
+          <button class="icon-button" id="closeActionEditorButton" type="button" aria-label="Tutup editor aksi">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+
+        <form id="actionForm" novalidate>
+          <div class="form-grid">
+            <label class="form-field">
+              <span class="field-label">Nama pad aksi</span>
+              <input id="actionTitleInput" type="text" maxlength="64" placeholder="Contoh: Mulai siaran" autocomplete="off" required>
+            </label>
+            <div class="form-field">
+              <span class="field-label">Hotkey pemicu</span>
+              <div class="hotkey-input-row">
+                <button class="hotkey-recorder" id="actionHotkeyRecorder" type="button">
+                  <span id="actionHotkeyValue">Tekan tombol...</span>
+                </button>
+                <button class="clear-hotkey" id="clearActionHotkeyButton" type="button" aria-label="Hapus hotkey aksi">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>
+                </button>
+              </div>
+              <small class="field-help" id="actionHotkeyHelp">Pemicu ini tetap bekerja saat AERO DECK berada di latar belakang.</small>
+            </div>
+          </div>
+
+          <div class="hotkey-warning" id="actionSingleKeyWarning" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 2.5 20h19Z"/><path d="M12 9v4M12 17h.01"/>
+            </svg>
+            <span>Tombol tunggal aktif secara global. Gunakan kombinasi Ctrl/Alt/Shift untuk mengurangi pemicu tidak sengaja.</span>
+          </div>
+
+          <div class="form-grid action-meta-grid">
+            <label class="form-field">
+              <span class="field-label">Jenis aksi utama</span>
+              <select id="actionTypeSelect" class="form-select">
+                <option value="open">Buka file, aplikasi, atau folder</option>
+                <option value="close">Tutup aplikasi</option>
+                <option value="website">Buka website / URI</option>
+                <option value="hotkey">Kirim hotkey</option>
+                <option value="text">Ketik teks</option>
+                <option value="multimedia">Kontrol multimedia</option>
+                <option value="switch-deck">Pindah deck</option>
+                <option value="sequence">Rangkaian berurutan</option>
+                <option value="parallel">Bersamaan</option>
+                <option value="random">Pilih secara acak</option>
+                <option value="toggle">Beralih dua keadaan</option>
+              </select>
+              <small class="field-help" id="actionTypeHelp">Pilih apa yang dijalankan ketika pad ditekan.</small>
+            </label>
+            <div class="form-field">
+              <span class="field-label">Warna pad</span>
+              <div class="color-options" id="actionColorOptions" aria-label="Pilih warna aksi">
+                <button class="color-swatch is-selected" data-color="#7c5cff" type="button" aria-label="Ungu"></button>
+                <button class="color-swatch" data-color="#1fc6a4" type="button" aria-label="Hijau"></button>
+                <button class="color-swatch" data-color="#ff6b8a" type="button" aria-label="Merah muda"></button>
+                <button class="color-swatch" data-color="#ffad42" type="button" aria-label="Jingga"></button>
+                <button class="color-swatch" data-color="#4c8dff" type="button" aria-label="Biru"></button>
+                <button class="color-swatch" data-color="#b861e8" type="button" aria-label="Magenta"></button>
+              </div>
+            </div>
+          </div>
+
+          <section class="action-builder" aria-labelledby="actionBuilderTitle">
+            <div class="action-builder-heading">
+              <div>
+                <span class="modal-kicker">BUILDER VISUAL</span>
+                <h3 id="actionBuilderTitle">Konfigurasi aksi</h3>
+              </div>
+              <span class="action-builder-limit" id="actionBuilderLimit"></span>
+            </div>
+            <div id="actionRootFields"></div>
+            <div class="automation-builder" id="automationBuilder" hidden>
+              <div class="automation-list" id="actionStepList"></div>
+              <button class="secondary-button add-step-button" id="addActionStepButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                Tambah langkah
+              </button>
+            </div>
+          </section>
+
+          <div class="action-form-error" id="actionFormError" role="alert" hidden></div>
+
+          <div class="modal-actions">
+            <span class="save-hint">Aksi berjalan lokal di komputer ini.</span>
+            <button class="secondary-button" id="cancelActionEditorButton" type="button">Batal</button>
+            <button class="primary-button" id="saveActionButton" type="submit">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 9.5 17 19 7.5"/></svg>
+              Simpan aksi
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="deckModal" hidden>
+      <section class="modal compact-modal" role="dialog" aria-modal="true" aria-labelledby="deckModalTitle">
+        <div class="modal-header">
+          <div>
+            <span class="modal-kicker">KELOLA DECK</span>
+            <h2 id="deckModalTitle">Buat deck baru</h2>
+            <p id="deckModalDescription">Beri nama yang mudah dikenali saat sedang live.</p>
+          </div>
+          <button class="icon-button" id="closeDeckModalButton" type="button" aria-label="Tutup">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <form class="compact-form" id="deckForm">
+          <label class="form-field">
+            <span class="field-label">Nama deck</span>
+            <input id="deckTitleInput" type="text" maxlength="48" placeholder="Contoh: Streaming malam" autocomplete="off" required>
+          </label>
+          <div class="modal-actions compact-modal-actions">
+            <button class="secondary-button" id="cancelDeckButton" type="button">Batal</button>
+            <button class="primary-button" id="saveDeckButton" type="submit">Simpan deck</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="settingsModal" hidden>
+      <section class="modal settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <div class="modal-header">
+          <div>
+            <span class="modal-kicker">AERO DECK</span>
+            <h2 id="settingsTitle">Pengaturan & Tentang</h2>
+            <p>Atur perilaku aplikasi, cadangan, dan informasi versi.</p>
+          </div>
+          <button class="icon-button" id="closeSettingsButton" type="button" aria-label="Tutup">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+
+        <div class="settings-content">
+          <section class="settings-group" aria-labelledby="settingsHotkeyTitle">
+            <div class="settings-group-heading">
+              <span class="settings-group-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M7 10h.01M11 10h.01M15 10h.01M7 14h.01M11 14h6"/></svg>
+              </span>
+              <div><h3 id="settingsHotkeyTitle">Tombol darurat</h3><p>Hentikan seluruh audio dan video dari aplikasi mana pun.</p></div>
+            </div>
+            <div class="setting-hotkey-row">
+              <button class="hotkey-recorder" id="stopAllHotkeyRecorder" type="button">
+                <span id="stopAllHotkeyValue">Belum diatur</span>
+              </button>
+              <button class="clear-hotkey" id="clearStopAllHotkeyButton" type="button" aria-label="Hapus hotkey Hentikan semua">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>
+              </button>
+            </div>
+            <small class="field-help" id="stopAllHotkeyHelp">Klik lalu tekan tombol atau kombinasi yang ingin digunakan.</small>
+          </section>
+
+          <section class="settings-group" aria-labelledby="settingsStartupTitle">
+            <div class="settings-group-heading">
+              <span class="settings-group-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9M7 5.5a8 8 0 1 0 10 0"/></svg>
+              </span>
+              <div><h3 id="settingsStartupTitle">Saat Windows menyala</h3><p>Siapkan AERO DECK otomatis agar hotkey langsung tersedia.</p></div>
+            </div>
+            <label class="setting-toggle-row">
+              <span><strong>Jalankan bersama Windows</strong><small>Buka AERO DECK setelah Anda masuk ke Windows.</small></span>
+              <span class="switch">
+                <input type="checkbox" id="launchAtLoginToggle">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </span>
+            </label>
+            <label class="setting-toggle-row">
+              <span><strong>Mulai tersembunyi</strong><small>Aplikasi langsung siap di system tray tanpa membuka dashboard.</small></span>
+              <span class="switch">
+                <input type="checkbox" id="startMinimizedToggle">
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+              </span>
+            </label>
+          </section>
+
+          <section class="settings-group" aria-labelledby="settingsBackupTitle">
+            <div class="settings-group-heading">
+              <span class="settings-group-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M8 8l4-4 4 4M5 14v5h14v-5"/></svg>
+              </span>
+              <div><h3 id="settingsBackupTitle">Cadangan koleksi</h3><p>Simpan deck dan pengaturan, atau pulihkan dari file cadangan.</p></div>
+            </div>
+            <div class="settings-button-row">
+              <button class="secondary-button" id="exportBackupButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M8 8l4-4 4 4M5 14v5h14v-5"/></svg>
+                Ekspor cadangan
+              </button>
+              <button class="secondary-button" id="importBackupButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V9M8 16l4 4 4-4M5 10V5h14v5"/></svg>
+                Impor cadangan
+              </button>
+            </div>
+            <small class="field-help">File media tetap berada di lokasi aslinya dan tidak disalin ke dalam cadangan.</small>
+          </section>
+
+          <section class="settings-group about-group" aria-labelledby="settingsAboutTitle">
+            <div class="about-brand">
+              <div class="brand-mark" aria-hidden="true"><span class="brand-wing brand-wing-left"></span><span class="brand-core">A</span><span class="brand-wing brand-wing-right"></span></div>
+              <div><span class="modal-kicker">GRATIS & OPEN SOURCE</span><h3 id="settingsAboutTitle">AERO DECK <span id="appVersion">—</span></h3><p>Soundboard dan video deck independen untuk Windows.</p></div>
+            </div>
+            <dl class="app-info-list">
+              <div><dt>Data aplikasi</dt><dd id="appDataPath">—</dd></div>
+            </dl>
+            <div class="settings-button-row settings-button-wrap">
+              <button class="secondary-button" id="checkUpdatesButton" type="button">Cek pembaruan</button>
+              <button class="secondary-button" id="openDataFolderButton" type="button">Buka folder data</button>
+              <button class="secondary-button" id="openReleasesButton" type="button">Lihat halaman rilis</button>
+            </div>
+            <p class="independent-note">AERO DECK adalah proyek independen dan tidak berafiliasi dengan Elgato atau pihak lain.</p>
+          </section>
+        </div>
+
+        <div class="settings-footer">
+          <span>Pengaturan disimpan secara lokal di komputer ini.</span>
+          <button class="primary-button" id="doneSettingsButton" type="button">Selesai</button>
+        </div>
+      </section>
+    </div>
+
     <div class="modal-backdrop confirm-backdrop" id="confirmModal" hidden>
       <section class="confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle">
         <div class="confirm-icon">
@@ -372,7 +663,7 @@
         <p id="confirmMessage">File asli di komputer tidak akan dihapus.</p>
         <div>
           <button class="secondary-button" id="cancelDeleteButton" type="button">Batal</button>
-          <button class="delete-button" id="confirmDeleteButton" type="button">Hapus pad</button>
+          <button class="delete-button" id="confirmDeleteButton" type="button">Hapus</button>
         </div>
       </section>
     </div>
@@ -384,7 +675,7 @@
       <span class="guide-kicker">MULAI CEPAT</span>
       <h2>Tiga langkah, langsung on-air.</h2>
       <ol>
-        <li><span>1</span><div><strong>Tambahkan media</strong><p>Pilih audio atau video dari komputer.</p></div></li>
+        <li><span>1</span><div><strong>Tambahkan pad</strong><p>Pilih media atau bangun aksi Windows.</p></div></li>
         <li><span>2</span><div><strong>Pasangkan hotkey</strong><p>Gunakan huruf, angka, F-key, atau kombinasi.</p></div></li>
         <li><span>3</span><div><strong>Minimalkan AERO DECK</strong><p>Hotkey tetap aktif saat Anda memakai aplikasi lain.</p></div></li>
       </ol>

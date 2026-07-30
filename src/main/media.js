@@ -15,7 +15,11 @@ function classifyMedia(filePath) {
 }
 
 function inspectMediaFile(filePath) {
-  const normalizedPath = path.resolve(String(filePath ?? ''));
+  const sourcePath = String(filePath ?? '').trim();
+  if (/^(?:\\\\|\/\/)/.test(sourcePath)) {
+    throw new Error('Lokasi media jaringan atau device path tidak didukung.');
+  }
+  const normalizedPath = path.resolve(sourcePath);
   if (!fs.existsSync(normalizedPath) || !fs.statSync(normalizedPath).isFile()) {
     throw new Error('File media tidak ditemukan.');
   }
@@ -34,6 +38,17 @@ function inspectMediaFile(filePath) {
 }
 
 function serializePad(pad) {
+  if (pad.type === 'action') {
+    const hasLocalTarget = ['open', 'close'].includes(pad.action?.type);
+    const targetPath = hasLocalTarget ? String(pad.action.target || '') : '';
+    const exists = hasLocalTarget ? fs.existsSync(targetPath) : true;
+    return {
+      ...pad,
+      exists,
+      fileName: targetPath ? path.basename(targetPath) : '',
+      mediaUrl: ''
+    };
+  }
   const exists = fs.existsSync(pad.mediaPath);
   return {
     ...pad,

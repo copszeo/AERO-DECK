@@ -50,8 +50,55 @@ test('marks missing files unavailable and encodes existing file URLs', () => {
   assert.equal(missing.mediaUrl, '');
 });
 
+test('serializes action pads without probing a media path', () => {
+  const pad = {
+    id: 'action-one',
+    title: 'Buka studio',
+    type: 'action',
+    action: { type: 'website', url: 'https://example.com/' }
+  };
+  assert.deepEqual(serializePad(pad), {
+    ...pad,
+    exists: true,
+    fileName: '',
+    mediaUrl: ''
+  });
+});
+
+test('marks a missing local action target without treating it as media', () => {
+  const target = path.join(os.tmpdir(), 'aero-deck-app-yang-tidak-ada.exe');
+  const pad = {
+    id: 'action-local',
+    title: 'Buka studio',
+    type: 'action',
+    action: { type: 'open', target }
+  };
+
+  assert.deepEqual(serializePad(pad), {
+    ...pad,
+    exists: false,
+    fileName: path.basename(target),
+    mediaUrl: ''
+  });
+});
+
 test('rejects missing and unsupported media', () => {
   assert.throws(() => inspectMediaFile('/definitely/missing/audio.mp3'), /tidak ditemukan/);
+  const originalExistsSync = fs.existsSync;
+  let networkPathWasProbed = false;
+  fs.existsSync = () => {
+    networkPathWasProbed = true;
+    return false;
+  };
+  try {
+    assert.throws(
+      () => inspectMediaFile('\\\\server\\share\\audio.mp3'),
+      /jaringan atau device path/
+    );
+    assert.equal(networkPathWasProbed, false);
+  } finally {
+    fs.existsSync = originalExistsSync;
+  }
 
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'aero-deck-unsupported-'));
   const filePath = path.join(directory, 'document.txt');
