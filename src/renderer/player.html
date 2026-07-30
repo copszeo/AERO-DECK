@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' file: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'"
+    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AERO DECK Player</title>
+    <link rel="stylesheet" href="player.css">
+  </head>
+  <body>
+    <div class="player-shell">
+      <header class="player-titlebar">
+        <div class="player-drag">
+          <div class="player-mark" aria-hidden="true"><span>A</span></div>
+          <strong>AERO DECK</strong>
+          <span class="title-divider"></span>
+          <span id="windowMediaTitle">Video player</span>
+        </div>
+        <div class="player-window-actions">
+          <button id="pinButton" type="button" aria-label="Selalu di atas" title="Selalu di atas">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 4 6 6M8 9l-3 3 7 7 3-3M12 12l7-7M8.5 15.5 4-4M5 19l-2 2"/>
+            </svg>
+          </button>
+          <button data-player-action="minimize" type="button" aria-label="Minimalkan">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5h8"/></svg>
+          </button>
+          <button data-player-action="maximize" type="button" aria-label="Maksimalkan">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><rect x="2.5" y="2.5" width="7" height="7" rx=".5"/></svg>
+          </button>
+          <button class="close-player" data-player-action="hide-player" type="button" aria-label="Tutup player">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="m3 3 6 6M9 3 3 9"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="player-stage">
+        <video id="videoPlayer" controls playsinline></video>
+        <audio id="audioPlayer"></audio>
+
+        <div class="player-idle" id="playerIdle">
+          <div class="idle-emblem">
+            <span class="idle-wing idle-wing-left"></span>
+            <strong>A</strong>
+            <span class="idle-wing idle-wing-right"></span>
+          </div>
+          <h1>Siap menerima hotkey</h1>
+          <p>Video akan tampil di jendela ini saat dipicu dari AERO DECK.</p>
+        </div>
+
+        <div class="player-loading" id="playerLoading" hidden>
+          <span class="loading-ring"></span>
+          <strong>Menyiapkan media…</strong>
+        </div>
+
+        <div class="player-error" id="playerError" hidden>
+          <span>!</span>
+          <strong>Video tidak dapat diputar</strong>
+          <p id="playerErrorMessage">Periksa file atau format media.</p>
+        </div>
+
+        <div class="media-title-overlay" id="titleOverlay" hidden>
+          <span>NOW PLAYING</span>
+          <strong id="overlayMediaTitle">—</strong>
+        </div>
+
+        <div class="stage-actions" id="stageActions" hidden>
+          <button id="fullscreenButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
+            </svg>
+            Layar penuh
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script src="player.js"></script>
+  </body>
+</html>

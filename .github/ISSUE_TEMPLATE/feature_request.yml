@@ -1,0 +1,77 @@
+name: Usulan fitur
+description: Usulkan peningkatan yang membuat AERO DECK lebih mudah, aman, atau andal.
+title: "[Fitur]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Jelaskan masalah pengguna terlebih dahulu. Contoh konkret lebih membantu daripada daftar implementasi yang panjang.
+
+        Jangan sertakan media pribadi, isi library, atau path pengguna lengkap.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah yang ingin diselesaikan
+      placeholder: "Saat menyiapkan banyak pad untuk acara, saya kesulitan..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solusi yang diusulkan
+      description: Jelaskan alur pengguna dan hasil akhirnya.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area utama
+      options:
+        - Hotkey dan keyboard
+        - Audio
+        - Video dan player
+        - Library dan pengelolaan file
+        - System tray dan window
+        - Installer dan distribusi
+        - UI dan aksesibilitas
+        - Developer experience
+        - Lainnya
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Contoh penggunaan
+      description: Sertakan jumlah pad, kondisi background, atau format media bila relevan.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatif yang sudah dicoba
+
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Dampak privasi atau keamanan
+      description: Apakah fitur memerlukan akses file baru, jaringan, telemetry, credential, atau API preload/IPC baru?
+      placeholder: "Tidak ada / Ya, karena..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pemeriksaan sebelum mengirim
+      options:
+        - label: Saya sudah mencari usulan serupa.
+          required: true
+        - label: Contoh saya tidak memuat path atau data pribadi.
+          required: true

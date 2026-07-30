@@ -1,0 +1,136 @@
+name: Laporan bug
+description: Laporkan masalah hotkey, audio/video, library, UI, tray, atau installer.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih sudah membantu memperbaiki AERO DECK.
+
+        **Privasi:** jangan unggah media pribadi, file library AERO DECK, atau path lengkap. Ganti `C:\Users\Nama\...` menjadi `C:\Users\<nama>\...`. Untuk kerentanan keamanan, gunakan petunjuk privat di `SECURITY.md`, bukan formulir ini.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area masalah
+      options:
+        - Hotkey global
+        - Perekam atau kombinasi hotkey
+        - Audio
+        - Video atau jendela player
+        - Library, file, atau path media
+        - Startup, system tray, atau window
+        - Installer atau update
+        - UI atau aksesibilitas
+        - Lainnya
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: Versi AERO DECK
+      description: Lihat versi rilis atau nama artifact yang digunakan.
+      placeholder: "Contoh: 1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: windows-version
+    attributes:
+      label: Versi Windows
+      placeholder: "Contoh: Windows 11 24H2 x64"
+    validations:
+      required: true
+
+  - type: input
+    id: install-source
+    attributes:
+      label: Cara menjalankan aplikasi
+      placeholder: "Installer NSIS, win-unpacked, atau npm start"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Langkah reproduksi
+      description: Tulis langkah bernomor dari aplikasi baru dibuka sampai bug muncul.
+      placeholder: |
+        1. Tambahkan fixture `contoh.mp3`.
+        2. Pasang hotkey `Ctrl+Shift+1`.
+        3. Sembunyikan aplikasi ke system tray.
+        4. Tekan hotkey dari aplikasi lain.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Perilaku yang diharapkan
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Perilaku yang terjadi
+      description: Sertakan pesan error yang sudah disamarkan bila ada.
+    validations:
+      required: true
+
+  - type: textarea
+    id: hotkey-context
+    attributes:
+      label: Detail hotkey
+      description: Isi jika terkait hotkey.
+      placeholder: |
+        Hotkey: Ctrl+Shift+1
+        Layout keyboard: US
+        Hotkey global: aktif
+        Kondisi: aplikasi fokus / background / minimized / tray
+        Konflik dengan aplikasi lain: tidak diketahui
+
+  - type: textarea
+    id: media-context
+    attributes:
+      label: Detail media
+      description: Isi jika terkait audio/video. Jangan unggah media pribadi.
+      placeholder: |
+        Tipe dan ekstensi: audio .mp3
+        Codec jika diketahui: MP3
+        File dapat diputar di aplikasi lain: ya
+        Path tersamarkan: C:\Users\<nama>\Music\<folder>\contoh.mp3
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frekuensi
+      options:
+        - Selalu
+        - Sering
+        - Kadang-kadang
+        - Hanya sekali
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Log atau tangkapan layar
+      description: Opsional. Samarkan username, path, nama file pribadi, dan isi media.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pemeriksaan sebelum mengirim
+      options:
+        - label: Saya sudah mencari issue serupa.
+          required: true
+        - label: Saya sudah menghapus path dan informasi pribadi.
+          required: true
+        - label: Ini bukan laporan kerentanan keamanan.
+          required: true

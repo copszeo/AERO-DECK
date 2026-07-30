@@ -1,0 +1,80 @@
+{
+  "name": "aero-deck",
+  "version": "1.0.0",
+  "description": "Soundboard dan video deck untuk Windows dengan global hotkey.",
+  "main": "src/main/main.js",
+  "private": true,
+  "author": {
+    "name": "Cops Zeo",
+    "url": "https://github.com/copszeo"
+  },
+  "homepage": "https://github.com/copszeo/AERO-DECK#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/copszeo/AERO-DECK.git"
+  },
+  "bugs": {
+    "url": "https://github.com/copszeo/AERO-DECK/issues"
+  },
+  "keywords": [
+    "soundboard",
+    "stream-deck",
+    "global-hotkey",
+    "audio",
+    "video",
+    "electron",
+    "windows"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "check": "node --check src/main/main.js && node --check src/main/pad-store.js && node --check src/main/hotkey.js && node --check src/main/media.js && node --check src/main/playback-queue.js && node --check src/preload/dashboard.js && node --check src/preload/player.js && node --check src/renderer/app.js && node --check src/renderer/player.js",
+    "dist:win": "electron-builder --win nsis --x64 --publish never",
+    "pack:win": "electron-builder --win dir --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "43.2.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "id.aerodeck.app",
+    "productName": "AERO DECK",
+    "artifactName": "AERO-DECK-Setup-${version}.${ext}",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "assets/icon.png",
+      "requestedExecutionLevel": "asInvoker",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AERO DECK",
+      "uninstallDisplayName": "AERO DECK"
+    }
+  },
+  "allowScripts": {
+    "electron@43.2.0": true
+  }
+}

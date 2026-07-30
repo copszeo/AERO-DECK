@@ -1,0 +1,352 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  color: #f5f5f8;
+  background: #050507;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050507;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+button:focus-visible {
+  outline: 2px solid #9f89ff;
+  outline-offset: -2px;
+}
+
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.player-shell {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 40px minmax(0, 1fr);
+  background: #050507;
+}
+
+.player-titlebar {
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background: #0d0e13;
+  display: flex;
+  align-items: stretch;
+  user-select: none;
+}
+
+.player-drag {
+  -webkit-app-region: drag;
+  min-width: 0;
+  flex: 1;
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.player-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  color: #ddd5ff;
+  background: linear-gradient(145deg, #886cff, #4b32b4);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.player-drag > strong {
+  font-size: 10px;
+  letter-spacing: .13em;
+}
+
+.title-divider {
+  width: 1px;
+  height: 13px;
+  background: rgba(255,255,255,.12);
+}
+
+.player-drag > span:last-child {
+  min-width: 0;
+  max-width: 50vw;
+  overflow: hidden;
+  color: #777b8a;
+  font-size: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.player-window-actions {
+  -webkit-app-region: no-drag;
+  display: flex;
+}
+
+.player-window-actions button {
+  width: 45px;
+  border: 0;
+  background: transparent;
+  color: #aaadba;
+  display: grid;
+  place-items: center;
+  cursor: default;
+}
+
+.player-window-actions button:hover {
+  color: white;
+  background: rgba(255,255,255,.075);
+}
+
+.player-window-actions button.is-active {
+  color: #b5a5ff;
+  background: rgba(124,92,255,.13);
+}
+
+.player-window-actions .close-player:hover {
+  background: #c42b3b;
+}
+
+.player-window-actions svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.3;
+}
+
+.player-stage {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(124,92,255,.07), transparent 35%),
+    #050507;
+  display: grid;
+  place-items: center;
+}
+
+#videoPlayer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  background: #000;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+#videoPlayer.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.player-idle,
+.player-loading,
+.player-error {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.idle-emblem {
+  width: 82px;
+  height: 82px;
+  position: relative;
+  border: 1px solid rgba(147,125,255,.3);
+  border-radius: 24px;
+  color: #d9d0ff;
+  background: linear-gradient(145deg, rgba(124,92,255,.24), rgba(124,92,255,.045));
+  box-shadow: 0 22px 70px rgba(61,38,157,.25), inset 0 0 30px rgba(124,92,255,.08);
+  display: grid;
+  place-items: center;
+}
+
+.idle-emblem strong {
+  z-index: 1;
+  font-size: 35px;
+  font-style: italic;
+}
+
+.idle-wing {
+  width: 24px;
+  height: 8px;
+  position: absolute;
+  top: 46px;
+  border-top: 3px solid #a892ff;
+}
+
+.idle-wing-left {
+  left: 10px;
+  transform: rotate(-16deg);
+}
+
+.idle-wing-right {
+  right: 10px;
+  transform: rotate(16deg);
+}
+
+.player-idle h1 {
+  margin: 22px 0 7px;
+  font-size: 20px;
+}
+
+.player-idle p {
+  margin: 0;
+  color: #727685;
+  font-size: 11px;
+}
+
+.player-loading {
+  background: rgba(5,5,7,.82);
+}
+
+.loading-ring {
+  width: 42px;
+  height: 42px;
+  border: 3px solid rgba(255,255,255,.1);
+  border-top-color: #8d72ff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+.player-loading strong {
+  margin-top: 14px;
+  font-size: 11px;
+}
+
+.player-error {
+  background: #08080b;
+}
+
+.player-error > span {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: #ff7b91;
+  background: rgba(255,95,120,.1);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.player-error strong {
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.player-error p {
+  margin: 6px 0 0;
+  color: #7c808e;
+  font-size: 10px;
+}
+
+.media-title-overlay {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  left: 18px;
+  max-width: calc(100% - 140px);
+  padding: 10px 13px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  background: rgba(9,10,14,.68);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+  animation: overlay-out 4.5s forwards;
+}
+
+.media-title-overlay span {
+  display: block;
+  color: #a995ff;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.media-title-overlay strong {
+  display: block;
+  margin-top: 4px;
+  overflow: hidden;
+  font-size: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stage-actions {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  right: 18px;
+}
+
+.stage-actions button {
+  height: 35px;
+  padding: 0 11px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 9px;
+  color: #d6d7de;
+  background: rgba(9,10,14,.68);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.stage-actions button:hover {
+  background: rgba(28,29,37,.88);
+}
+
+.stage-actions svg {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes overlay-out {
+  0%, 72% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

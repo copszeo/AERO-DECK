@@ -1,0 +1,29 @@
+name: Permintaan kanal laporan keamanan
+description: Minta kanal privat jika private vulnerability reporting belum tersedia.
+title: "[Security contact]: "
+labels:
+  - security
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gunakan formulir ini **hanya** untuk meminta kanal komunikasi privat. Issue yang dibuat dari formulir ini bersifat publik.
+
+        Jangan tuliskan kerentanan, proof of concept, exploit, path lokal, log, atau data pengguna di sini. Jika tombol **Security → Advisories → Report a vulnerability** tersedia, tutup formulir ini dan gunakan tombol tersebut.
+
+  - type: textarea
+    id: request
+    attributes:
+      label: Permintaan kontak
+      description: Tulis permintaan singkat tanpa detail teknis.
+      placeholder: "Saya memiliki laporan keamanan dan memerlukan kanal privat untuk mengirimkannya."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Konfirmasi
+      options:
+        - label: Saya tidak menyertakan detail kerentanan atau informasi pribadi pada issue publik ini.
+          required: true
