@@ -10,6 +10,11 @@
 </p>
 
 <p align="center">
+  <strong>Alternatif software gratis dan open-source untuk Elgato Stream Deck.</strong><br>
+  Gunakan keyboard yang sudah Anda punya—tanpa harus membeli perangkat tambahan.
+</p>
+
+<p align="center">
   <a href="https://github.com/copszeo/AERO-DECK/actions">
     <img src="https://img.shields.io/github/actions/workflow/status/copszeo/AERO-DECK/ci.yml?branch=main&label=CI&style=flat-square" alt="Status CI">
   </a>
@@ -19,6 +24,7 @@
   <a href="#lisensi">
     <img src="https://img.shields.io/badge/lisensi-MIT-2ea44f?style=flat-square" alt="Lisensi MIT">
   </a>
+  <img src="https://img.shields.io/badge/harga-gratis-7C3AED?style=flat-square" alt="Gratis">
   <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D4?logo=windows&logoColor=white&style=flat-square" alt="Windows 10 dan 11">
   <img src="https://img.shields.io/badge/Electron-43.2.0-47848F?logo=electron&logoColor=white&style=flat-square" alt="Electron 43.2.0">
 </p>
@@ -34,6 +40,9 @@
 ---
 
 AERO DECK mengubah keyboard menjadi kumpulan media pad bergaya Stream Deck. Gunakan huruf, angka, `F1`–`F12`, atau kombinasi seperti `Ctrl+Alt+7` untuk memutar suara dan video tanpa harus kembali ke dashboard.
+
+> [!NOTE]
+> AERO DECK adalah proyek independen dan tidak berafiliasi, disponsori, atau didukung oleh Elgato maupun Corsair. Nama dan merek dagang terkait tetap menjadi milik pemegangnya masing-masing.
 
 ## Pratinjau
 
